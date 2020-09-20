@@ -1,3 +1,6 @@
+//! Piston-Tutorial: getting-start
+//! 
+//! 
 extern crate glutin_window;
 extern crate graphics;
 extern crate opengl_graphics;
@@ -9,6 +12,8 @@ use piston::event_loop::{EventSettings, Events};
 use piston::input::{RenderArgs, RenderEvent, UpdateArgs, UpdateEvent};
 use piston::window::WindowSettings;
 
+mod config;
+
 pub struct App {
     gl: GlGraphics, // OpenGL drawing backend.
     rotation: f64,  // Rotation for the square.
@@ -17,9 +22,7 @@ pub struct App {
 impl App {
     fn render(&mut self, args: &RenderArgs) {
         use graphics::*;
-
-        const GREEN: [f32; 4] = [0.0, 1.0, 0.0, 1.0];
-        const RED: [f32; 4] = [1.0, 0.0, 0.0, 1.0];
+        use config::*;
 
         let square = rectangle::square(0.0, 0.0, 50.0);
         let rotation = self.rotation;
@@ -27,7 +30,7 @@ impl App {
 
         self.gl.draw(args.viewport(), |c, gl| {
             // Clear the screen.
-            clear(GREEN, gl);
+            clear(BLUE, gl);
 
             let transform = c
                 .transform
